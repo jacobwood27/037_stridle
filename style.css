@@ -9,3 +9,38 @@ img {
     margin-left: auto;
     margin-right: auto;
   }
+
+.active-animation {
+  animation-name: fadeIn ;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  }
+
+@keyframes fadeIn {
+    0% {filter:opacity(0%);}
+    100% {filter:opacity(100%);}
+  }
+
+  .collapsible {
+    background-color: cornsilk;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 3px;
+    text-align: left;
+    font-size: 15px;
+    z-index: 5;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .collapsible:hover {
+    background-color: #ccc;
+  }
+
+  .content {
+    padding: 18px;
+    display: none;
+    overflow: hidden;
+    width: fit-content;
+    background-color: #f1f1f1;
+    position: absolute;
+  }

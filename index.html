@@ -7,12 +7,35 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="select2.min.js"></script>
-  
 </head>
 <body>
+  <button type="button" id="collapsible" class="collapsible">Info</button>
+  <div class="content">
+    <div>
+      <p style="margin-bottom: 2px; font-weight:bold; margin-top: 0px;">Data</p>
+      <p style="margin-bottom: 2px; margin-top: 2px;">All data is collected from <a href="https://www.worldathletics.org/records/all-time-toplists/sprints/100-metres/outdoor/women/senior">worldathletics.org</a></p>
+      <p style="margin-bottom: 2px; margin-top: 2px;">Top 10 athletes of all time in each event included</p>
+    </div>
+    <div>
+      <p style="margin-bottom: 2px; font-weight:bold">Colors</p>
+      <p style="text-align:center;margin-bottom: 2px; margin-top: 2px; background-color: #008450; color:white">Within 1% or same year/country</p>
+      <p style="text-align:center;margin-bottom: 2px; margin-top: 2px; background-color: #EFB700; color:white">Within 3% or 3 years</p>
+      <p style="text-align:center;margin-bottom: 2px; margin-top: 2px; background-color: #B81D13; color:white">Greater than 3% or 3 years</p>
+    </div>
+    <div>
+      <p style="margin-bottom: 2px; font-weight:bold">Arrows</p>
+      <p style="margin-bottom: 2px; margin-top: 2px;">⬆ = Mystery athlete's number is larger (slower, younger)</p>
+      <p style="margin-bottom: 2px; margin-top: 2px;">⬇ = Mystery athlete's number is smaller (faster, older)</p>
+    </div>
+  </div>
+
   <div class="content-wrapper">
-    <!-- <h1 style="text-align:center;">Stridle</h1> -->
-    <img src="14276130.gif" width="480">
+    <div style="text-align:center; position:relative;">  
+      <div style="height:400px; width:100%;"></div>
+      <video src='14276130_hidden.webm' id="video_hidden" loop muted autoplay style="                     position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:1"></video>
+      <video src='14276130_hint.webm'   id="video_hint"   loop muted autoplay style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:2"></video>
+      <video src='14276130_reveal.webm' id="video_reveal" loop muted autoplay style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:3"></video>
+    </div>
     <br>
     <div style="text-align:center;">    
         <label>Who is this? </label>
@@ -23,6 +46,8 @@
           <option disabled selected hidden value> -- select an option -- </option>
         </select>
       </form>
+      <br>
+      <button type="button" onclick="video_hint.classList.add('active-animation');">Hint!</button>
     </div>
     <br>
     <div style="text-align:center;background-color:beige">
@@ -76,17 +101,37 @@
     var IDOTD = 14276130;
     var flag = false;
     var POTD;
+
+    const video_hidden = document.getElementById('video_hidden');
+    const video_hint   = document.getElementById('video_hint');
+    const video_reveal = document.getElementById('video_reveal');
+
+    var dat = {};
+
+    var playback_speed = 1.0;
     
+    $('#video_reveal').on('click',function(){
+      if (playback_speed == 1.0){
+        playback_speed = 0.0;
+      } else if (playback_speed == 0.0) {
+        playback_speed = 0.5;
+      } else if (playback_speed == 0.5) {
+        playback_speed = 1.0;
+      }
+      video_hidden.playbackRate = playback_speed;
+      video_hint.playbackRate   = playback_speed;
+      video_reveal.playbackRate = playback_speed;
+    });
+
     var table = document.getElementById("ResultsTable");
 
-    // Initialize select2
     $("#personGuess").select2();
 
-
     $.getJSON("stats.json", function(json) {
-      dat = json; // this will show the info it in firebug console
-      for (var d in dat) {
-        var newOption = new Option(dat[d]["Name"], dat[d]["ID"], false, false);
+      dat_raw = json;
+      for (var d in dat_raw) {
+        var newOption = new Option(dat_raw[d]["Name"], dat_raw[d]["ID"], false, false);
+        dat[dat_raw[d]["ID"]] = dat_raw[d]
         $('#personGuess').append(newOption).trigger('change');
       }
       POTD = dat[IDOTD];
@@ -158,7 +203,9 @@
       } 
 
       if (IDOTD == e.params.data.id) {
-        alert("You've done it! \n The stride was taken from Paula's performance at the 2005 World Championships in Helsinki. \n https://www.youtube.com/watch?v=wRw754RYPDM");
+        video_reveal.classList.add("active-animation");
+//        video.style.width = "0px";
+//        <!-- alert("You've done it! \n The stride was taken from Paula's performance at the 2005 World Championships in Helsinki. \n https://www.youtube.com/watch?v=wRw754RYPDM"); -->
       }
 
       $("#personGuess").val('').trigger('change');
@@ -166,4 +213,15 @@
 
   });
 
+
+  var coll = document.getElementById("collapsible");
+    coll.addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "block";
+    }
+  });
 </script>
