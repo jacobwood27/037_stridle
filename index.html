@@ -31,6 +31,7 @@
     <div>
       <p style="margin-bottom: 2px; font-weight:bold;">Credit</p>
       <p style="margin-bottom: 2px; margin-top: 2px;">Idea credit to Paul Wellman and August Pappas</p>
+      <p style="margin-bottom: 2px; margin-top: 2px;">Pixel segmentation performed with <a href="https://google.github.io/mediapipe/solutions/pose.html"> Google's MediaPipe</a></p>
     </div>
   </div>
 </div>
@@ -38,9 +39,9 @@
   <div class="content-wrapper">
     <div style="text-align:center; position:relative;">  
       <div style="height:400px; width:100%;"></div>
-      <video src='14276130_hidden.mp4' type="video/mp4" id="video_hidden" playsinline loop muted autoplay style="                     position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:1"></video>
-      <video src='14276130_hint.mp4'   type="video/mp4" id="video_hint"   playsinline loop muted autoplay style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:2"></video>
-      <video src='14276130_reveal.mp4' type="video/mp4" id="video_reveal" playsinline loop muted autoplay style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:3"></video>
+      <video src='vids/14347437/hidden.mp4' type="video/mp4" id="video_hidden" playsinline loop muted autoplay style="                     position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:1"></video>
+      <video src='vids/14347437/hint.mp4'   type="video/mp4" id="video_hint"   playsinline loop muted autoplay style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:2"></video>
+      <video src='vids/14347437/reveal.mp4' type="video/mp4" id="video_reveal" playsinline loop muted autoplay style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:3"></video>
     </div>
     <br>
     <div style="text-align:center;">    
@@ -74,6 +75,9 @@
             </tr>
           </table>
     </div>
+    <br>
+    <div style="text-align:center;" id="winMessage">
+    </div>
   </div>
 </body>
 </html>
@@ -104,13 +108,27 @@
   $(document).ready(function(){
     var dat;
 
-    var IDOTD = 14276130;
+    var IDOTD;
     var flag = false;
     var POTD;
+
+    const winmess = document.getElementById('winMessage');
 
     const video_hidden = document.getElementById('video_hidden');
     const video_hint   = document.getElementById('video_hint');
     const video_reveal = document.getElementById('video_reveal');
+
+    var order;
+    $.getJSON("order.json", function(json) {
+      order = json;
+    });
+
+    var counter;
+    $.getJSON("counter", function(json) {
+      counter = json;
+      IDOTD = order[counter-1];
+    });
+
 
     var dat = {};
 
@@ -213,7 +231,7 @@
 //        video.style.width = "0px";
 //        <!-- alert("You've done it! \n The stride was taken from Paula's performance at the 2005 World Championships in Helsinki. \n https://www.youtube.com/watch?v=wRw754RYPDM"); -->
       }
-
+        winmess.innerHTML = POTD["message"];
       $("#personGuess").val('').trigger('change');
     });
 
