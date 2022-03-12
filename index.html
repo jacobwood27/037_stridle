@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="select2.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="select2.min.js"></script>
+  
+</head>
+<body>
+  <div class="content-wrapper">
+    <!-- <h1 style="text-align:center;">Stridle</h1> -->
+    <img src="14276130.gif" width="480">
+    <br>
+    <div style="text-align:center;">    
+        <label>Who is this? </label>
+    </div>
+    <div style="text-align:center;">
+        <form>
+        <select name="personGuess" id="personGuess" style='text-align:center;width:300px'>
+          <option disabled selected hidden value> -- select an option -- </option>
+        </select>
+      </form>
+    </div>
+    <br>
+    <div style="text-align:center;background-color:beige">
+        <table id="ResultsTable" style="width: 100%">
+            <tr>
+              <th style="width: 12%;">Name</th>
+              <th>Nation</th>
+              <th>Birth</th>
+              <th>100</th>
+              <th>200</th>
+              <th>400</th>
+              <th>800</th>
+              <th>1500</th>
+              <th>3000SC</th>
+              <th>5000</th>
+              <th>10000</th>
+              <th>Marathon</th>
+            </tr>
+          </table>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+
+  function fancyTimeFormat(duration)
+  {   
+      // Hours, minutes and seconds
+      var hrs = ~~(duration / 3600);
+      var mins = ~~((duration % 3600) / 60);
+      var secs = duration % 60;
+  
+      // Output like "1:01" or "4:03:59" or "123:03:59"
+      var ret = "";
+  
+      if (hrs > 0) {
+          ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+      }
+
+      if (mins > 0) {
+        ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+      }
+  
+      ret += "" + Math.round(secs * 100) / 100;
+      return ret;
+  }
+
+  $(document).ready(function(){
+    var dat;
+
+    var IDOTD = 14276130;
+    var flag = false;
+    var POTD;
+    
+    var table = document.getElementById("ResultsTable");
+
+    // Initialize select2
+    $("#personGuess").select2();
+
+
+    $.getJSON("stats.json", function(json) {
+      dat = json; // this will show the info it in firebug console
+      for (var d in dat) {
+        var newOption = new Option(dat[d]["Name"], dat[d]["ID"], false, false);
+        $('#personGuess').append(newOption).trigger('change');
+      }
+      POTD = dat[IDOTD];
+    });
+
+    var fields = ["Name", "Country", "BirthYear", "100", "200", "400", "800", "1500", "3000SC", "5000", "10000", "Marathon"];
+    
+    $('#personGuess').on('select2:select', function (e) {
+      guess = dat[e.params.data.id];
+
+      var date = new Date(0);
+    
+      var row = table.insertRow();
+      for (const f of fields){
+        var cell = row.insertCell();
+        var value = guess[f];
+        if (typeof value === 'number' && f != "BirthYear") {
+          if (value > 0.1){
+            if (value < POTD[f]) {
+              cell.innerHTML = ("⬆ ").concat(fancyTimeFormat(value), " ⬆");
+            } else if (value > POTD[f] && POTD[f]>0.1) {
+              cell.innerHTML = ("⬇ ").concat(fancyTimeFormat(value), " ⬇");
+            } else {
+              cell.innerHTML = fancyTimeFormat(value);
+            }
+            if (POTD[f] > 0.1){
+              if (Math.abs((POTD[f]-value)/value) < 0.01) {
+                cell.style.backgroundColor = "#008450";
+                cell.style.color = "white";
+              } else if (Math.abs((POTD[f]-value)/value) < 0.03) {
+                cell.style.backgroundColor = "#EFB700";
+                cell.style.color = "white";
+              } else {
+                cell.style.backgroundColor = "#B81D13";
+                cell.style.color = "white";
+              }
+            }
+          }
+        } else if (f == "BirthYear"){
+          cell.innerHTML = value;
+          if (value < POTD[f]) {
+            cell.innerHTML = ("⬆ ").concat(value, " ⬆");
+          } else if (value > POTD[f]) {
+            cell.innerHTML = ("⬇ ").concat(value, " ⬇");
+          } else {
+            cell.innerHTML = value;
+          }
+          if (POTD[f] > 0.1){
+            if (Math.abs(POTD[f]-value) < 1) {
+              cell.style.backgroundColor = "#008450";
+              cell.style.color = "white";
+            } else if (Math.abs(POTD[f]-value) < 4) {
+              cell.style.backgroundColor = "#EFB700";
+              cell.style.color = "white";
+            } else {
+              cell.style.backgroundColor = "#B81D13";
+              cell.style.color = "white";
+            }
+          }
+        } else if (f == "Country"){ 
+          cell.innerHTML = value;
+          if (POTD[f] == value) {
+            cell.style.backgroundColor = "#008450";
+            cell.style.color = "white";
+          }
+        } else {
+          cell.innerHTML = value;
+        }
+      } 
+
+      if (IDOTD == e.params.data.id) {
+        alert("You've done it! \n The stride was taken from Paula's performance at the 2005 World Championships in Helsinki. \n https://www.youtube.com/watch?v=wRw754RYPDM");
+      }
+
+      $("#personGuess").val('').trigger('change');
+    });
+
+  });
+
+</script>
