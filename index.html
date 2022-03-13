@@ -1,251 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" type="text/css" href="select2.min.css">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="select2.min.js"></script>
-</head>
-<body>
-  <div style="text-align:center">
-  <button type="button" id="collapsible" class="collapsible" style="text-align:center;">Info</button>
-  <div class="content" ; style="z-index:10; text-align:center; top:50px; left:50%; transform: translate(-50%, 0%);">
-    <div>
-      <p style="margin-bottom: 2px; font-weight:bold; margin-top: 0px">Colors</p>
-      <p style="text-align:center;margin-bottom: 2px; margin-top: 2px; background-color: #008450; color:white">Within 1% or same year/country</p>
-      <p style="text-align:center;margin-bottom: 2px; margin-top: 2px; background-color: #EFB700; color:white">Within 3% or 3 years</p>
-      <p style="text-align:center;margin-bottom: 2px; margin-top: 2px; background-color: #B81D13; color:white">Greater than 3% or 3 years</p>
-    </div>
-    <div>
-      <p style="margin-bottom: 2px; font-weight:bold">Arrows</p>
-      <p style="margin-bottom: 2px; margin-top: 2px;">⬆ = Mystery athlete's number is larger (slower, younger)</p>
-      <p style="margin-bottom: 2px; margin-top: 2px;">⬇ = Mystery athlete's number is smaller (faster, older)</p>
-    </div>
-    <div>
-      <p style="margin-bottom: 2px; font-weight:bold;">Data</p>
-      <p style="margin-bottom: 2px; margin-top: 2px;">All data is collected from <a href="https://www.worldathletics.org/records/all-time-toplists/sprints/100-metres/outdoor/women/senior">worldathletics.org</a></p>
-      <p style="margin-bottom: 2px; margin-top: 2px;">Top 10 athletes of all time in each event included</p>
-    </div>
-    <div>
-      <p style="margin-bottom: 2px; font-weight:bold;">Credit</p>
-      <p style="margin-bottom: 2px; margin-top: 2px;">Idea credit to Paul Wellman and August Pappas</p>
-      <p style="margin-bottom: 2px; margin-top: 2px;">Pixel segmentation performed with <a href="https://google.github.io/mediapipe/solutions/pose.html"> Google's MediaPipe</a></p>
-    </div>
-  </div>
-</div>
 
-  <div class="content-wrapper">
-    <div style="text-align:center; position:relative;">  
-      <div style="height:400px; width:100%;"></div>
-      <video src='vids/14347437/hidden.mp4' type="video/mp4" id="video_hidden" playsinline loop muted autoplay style="                     position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:1"></video>
-      <video src='vids/14347437/hint.mp4'   type="video/mp4" id="video_hint"   playsinline loop muted autoplay style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:2"></video>
-      <video src='vids/14347437/reveal.mp4' type="video/mp4" id="video_reveal" playsinline loop muted autoplay style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:3"></video>
-    </div>
-    <br>
-    <div style="text-align:center;">    
-        <label>Whose stride is this? </label>
-    </div>
-    <div style="text-align:center;">
-        <form>
-        <select name="personGuess" id="personGuess" style='text-align:center;width:300px'>
-          <option disabled selected hidden value> -- select an option -- </option>
-        </select>
-      </form>
-      <br>
-      <button type="button" onclick="video_hint.classList.add('active-animation');">Hint!</button>
-    </div>
-    <br>
-    <div style="text-align:center;background-color:beige">
-        <table id="ResultsTable" style="width: 100%">
-            <tr>
-              <th style="width: 12%;">Name</th>
-              <th>Nation</th>
-              <th>Birth</th>
-              <th>100</th>
-              <th>200</th>
-              <th>400</th>
-              <th>800</th>
-              <th>1500</th>
-              <th>3000SC</th>
-              <th>5000</th>
-              <th>10000</th>
-              <th>Marathon</th>
-            </tr>
-          </table>
-    </div>
-    <br>
-    <div style="text-align:center;" id="winMessage">
-    </div>
-  </div>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" type="text/css" href="select2.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="select2.min.js"></script>
+</head>
+
+<body>
+	<div style="text-align:center">
+		<button type="button" id="collapsible" class="collapsible" style="text-align:center;">Info</button>
+		<div class="content" ;
+			style="z-index:10; text-align:center; top:50px; left:50%; transform: translate(-50%, 0%);">
+			<div>
+				<p style="margin-bottom: 2px; font-weight:bold; margin-top: 0px">Colors</p>
+				<p
+					style="text-align:center;margin-bottom: 2px; margin-top: 2px; background-color: #008450; color:white">
+					Within
+					1% or same year/country</p>
+				<p
+					style="text-align:center;margin-bottom: 2px; margin-top: 2px; background-color: #EFB700; color:white">
+					Within
+					3% or 3 years</p>
+				<p
+					style="text-align:center;margin-bottom: 2px; margin-top: 2px; background-color: #B81D13; color:white">
+					Greater
+					than 3% or 3 years</p>
+			</div>
+			<div>
+				<p style="margin-bottom: 2px; font-weight:bold">Arrows</p>
+				<p style="margin-bottom: 2px; margin-top: 2px;">⬆ = Mystery athlete's number is larger (slower, younger)
+				</p>
+				<p style="margin-bottom: 2px; margin-top: 2px;">⬇ = Mystery athlete's number is smaller (faster, older)
+				</p>
+			</div>
+			<div>
+				<p style="margin-bottom: 2px; font-weight:bold;">Data</p>
+				<p style="margin-bottom: 2px; margin-top: 2px;">All data is collected from <a
+						href="https://www.worldathletics.org/records/all-time-toplists/sprints/100-metres/outdoor/women/senior">worldathletics.org</a>
+				</p>
+				<p style="margin-bottom: 2px; margin-top: 2px;">Top 10 athletes of all time in each event included</p>
+			</div>
+			<div>
+				<p style="margin-bottom: 2px; font-weight:bold;">Credit</p>
+				<p style="margin-bottom: 2px; margin-top: 2px;">Idea credit to Paul Wellman and August Pappas</p>
+				<p style="margin-bottom: 2px; margin-top: 2px;">Pixel segmentation performed with <a
+						href="https://google.github.io/mediapipe/solutions/pose.html"> Google's MediaPipe</a></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="content-wrapper">
+		<div style="text-align:center; position:relative;">
+			<div style="height:400px; width:100%;"></div>
+			<video src='vids/14347437/hidden.mp4' type="video/mp4" id="video_hidden" playsinline loop muted autoplay
+				style="                     position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:1"></video>
+			<video src='vids/14347437/hint.mp4' type="video/mp4" id="video_hint" playsinline loop muted autoplay
+				style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:2"></video>
+			<video src='vids/14347437/reveal.mp4' type="video/mp4" id="video_reveal" playsinline loop muted autoplay
+				style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:3"></video>
+		</div>
+		<br>
+		<div style="text-align:center;">
+			<label>Whose stride is this? </label>
+		</div>
+		<div style="text-align:center;">
+			<form>
+				<select name="personGuess" id="personGuess" style='text-align:center;width:300px'>
+					<option disabled selected hidden value> -- select an option -- </option>
+				</select>
+			</form>
+			<br>
+			<button type="button" onclick="video_hint.classList.add('active-animation');">Hint!</button>
+		</div>
+		<br>
+		<div style="text-align:center;background-color:beige">
+			<table id="ResultsTable" style="width: 100%">
+				<tr>
+					<th style="width: 12%;">Name</th>
+					<th>Nation</th>
+					<th>Birth</th>
+					<th>100</th>
+					<th>200</th>
+					<th>400</th>
+					<th>800</th>
+					<th>1500</th>
+					<th>3000SC</th>
+					<th>5000</th>
+					<th>10000</th>
+					<th>Marathon</th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<div style="text-align:center;" id="winMessage">
+		</div>
+	</div>
 </body>
+
 </html>
 <script>
 
-  function fancyTimeFormat(duration)
-  {   
-      // Hours, minutes and seconds
-      var hrs = ~~(duration / 3600);
-      var mins = ~~((duration % 3600) / 60);
-      var secs = duration % 60;
-  
-      // Output like "1:01" or "4:03:59" or "123:03:59"
-      var ret = "";
-  
-      if (hrs > 0) {
-          ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-      }
+	function fancyTimeFormat(duration) {
+		// Hours, minutes and seconds
+		var hrs = ~~(duration / 3600);
+		var mins = ~~((duration % 3600) / 60);
+		var secs = duration % 60;
 
-      if (mins > 0) {
-        ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-      }
-  
-      ret += "" + Math.round(secs * 100) / 100;
-      return ret;
-  }
+		// Output like "1:01" or "4:03:59" or "123:03:59"
+		var ret = "";
 
-  $(document).ready(function(){
-    var dat;
+		if (hrs > 0) {
+			ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+		}
 
-    var IDOTD;
-    var flag = false;
-    var POTD;
+		if (mins > 0) {
+			ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+		}
 
-    const winmess = document.getElementById('winMessage');
+		ret += "" + Math.round(secs * 100) / 100;
+		return ret;
+	}
 
-    const video_hidden = document.getElementById('video_hidden');
-    const video_hint   = document.getElementById('video_hint');
-    const video_reveal = document.getElementById('video_reveal');
+	$(document).ready(function () {
+		var dat;
 
-    var order;
-    $.getJSON("order.json", function(json) {
-      order = json;
-    });
+		var IDOTD;
+		var flag = false;
+		var POTD;
 
-    var counter;
-    $.getJSON("counter", function(json) {
-      counter = json;
-      IDOTD = order[counter-1];
-    });
+		const winmess = document.getElementById('winMessage');
 
+		const video_hidden = document.getElementById('video_hidden');
+		const video_hint = document.getElementById('video_hint');
+		const video_reveal = document.getElementById('video_reveal');
 
-    var dat = {};
+		var order;
+		$.getJSON("order.json", function (json) {
+			order = json;
+		});
 
-    var playback_speed = 1.0;
-    
-    $('#video_reveal').on('click',function(){
-      if (playback_speed == 1.0){
-        playback_speed = 0.0;
-      } else if (playback_speed == 0.0) {
-        playback_speed = 0.5;
-      } else if (playback_speed == 0.5) {
-        playback_speed = 1.0;
-      }
-      video_hidden.playbackRate = playback_speed;
-      video_hint.playbackRate   = playback_speed;
-      video_reveal.playbackRate = playback_speed;
-    });
-
-    var table = document.getElementById("ResultsTable");
-
-    $("#personGuess").select2();
-
-    $.getJSON("stats.json", function(json) {
-      dat_raw = json;
-      for (var d in dat_raw) {
-        var newOption = new Option(dat_raw[d]["Name"], dat_raw[d]["ID"], false, false);
-        dat[dat_raw[d]["ID"]] = dat_raw[d]
-        $('#personGuess').append(newOption).trigger('change');
-      }
-      POTD = dat[IDOTD];
-    });
-
-    var fields = ["Name", "Country", "BirthYear", "100", "200", "400", "800", "1500", "3000SC", "5000", "10000", "Marathon"];
-    
-    $('#personGuess').on('select2:select', function (e) {
-      guess = dat[e.params.data.id];
-
-      var date = new Date(0);
-    
-      var row = table.insertRow();
-      for (const f of fields){
-        var cell = row.insertCell();
-        var value = guess[f];
-        if (typeof value === 'number' && f != "BirthYear") {
-          if (value > 0.1){
-            if (value < POTD[f]) {
-              cell.innerHTML = ("⬆ ").concat(fancyTimeFormat(value), " ⬆");
-            } else if (value > POTD[f] && POTD[f]>0.1) {
-              cell.innerHTML = ("⬇ ").concat(fancyTimeFormat(value), " ⬇");
-            } else {
-              cell.innerHTML = fancyTimeFormat(value);
-            }
-            if (POTD[f] > 0.1){
-              if (Math.abs((POTD[f]-value)/value) < 0.01) {
-                cell.style.backgroundColor = "#008450";
-                cell.style.color = "white";
-              } else if (Math.abs((POTD[f]-value)/value) < 0.03) {
-                cell.style.backgroundColor = "#EFB700";
-                cell.style.color = "white";
-              } else {
-                cell.style.backgroundColor = "#B81D13";
-                cell.style.color = "white";
-              }
-            }
-          }
-        } else if (f == "BirthYear"){
-          cell.innerHTML = value;
-          if (value < POTD[f]) {
-            cell.innerHTML = ("⬆ ").concat(value, " ⬆");
-          } else if (value > POTD[f]) {
-            cell.innerHTML = ("⬇ ").concat(value, " ⬇");
-          } else {
-            cell.innerHTML = value;
-          }
-          if (POTD[f] > 0.1){
-            if (Math.abs(POTD[f]-value) < 1) {
-              cell.style.backgroundColor = "#008450";
-              cell.style.color = "white";
-            } else if (Math.abs(POTD[f]-value) < 4) {
-              cell.style.backgroundColor = "#EFB700";
-              cell.style.color = "white";
-            } else {
-              cell.style.backgroundColor = "#B81D13";
-              cell.style.color = "white";
-            }
-          }
-        } else if (f == "Country" || f == "Name"){ 
-          cell.innerHTML = value;
-          if (POTD[f] == value) {
-            cell.style.backgroundColor = "#008450";
-            cell.style.color = "white";
-          }
-        } else {
-          cell.innerHTML = value;
-        }
-      } 
-
-      if (IDOTD == e.params.data.id) {
-        video_reveal.classList.add("active-animation");
-//        video.style.width = "0px";
-//        <!-- alert("You've done it! \n The stride was taken from Paula's performance at the 2005 World Championships in Helsinki. \n https://www.youtube.com/watch?v=wRw754RYPDM"); -->
-      }
-        winmess.innerHTML = POTD["message"];
-      $("#personGuess").val('').trigger('change');
-    });
-
-  });
+		var counter;
+		$.getJSON("counter", function (json) {
+			counter = json;
+			IDOTD = order[counter - 1];
+			video_hidden.src = 'vids/' + IDOTD.toString() + '/hidden.mp4';
+			video_hint.src = 'vids/' + IDOTD.toString() + '/hint.mp4';
+			video_reveal.src = 'vids/' + IDOTD.toString() + '/reveal.mp4';
+		});
 
 
-  var coll = document.getElementById("collapsible");
-    coll.addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-        content.style.display = "none";
-    } else {
-        content.style.display = "block";
-    }
-  });
+		var dat = {};
+
+		var playback_speed = 1.0;
+
+		$('#video_reveal').on('click', function () {
+			if (playback_speed == 1.0) {
+				playback_speed = 0.0;
+			} else if (playback_speed == 0.0) {
+				playback_speed = 0.5;
+			} else if (playback_speed == 0.5) {
+				playback_speed = 1.0;
+			}
+			video_hidden.playbackRate = playback_speed;
+			video_hint.playbackRate = playback_speed;
+			video_reveal.playbackRate = playback_speed;
+		});
+
+		var table = document.getElementById("ResultsTable");
+
+		$("#personGuess").select2();
+
+		$.getJSON("stats.json", function (json) {
+			dat_raw = json;
+			for (var d in dat_raw) {
+				var newOption = new Option(dat_raw[d]["Name"], dat_raw[d]["ID"], false, false);
+				dat[dat_raw[d]["ID"]] = dat_raw[d]
+				$('#personGuess').append(newOption).trigger('change');
+			}
+			
+		});
+
+		var fields = ["Name", "Country", "BirthYear", "100", "200", "400", "800", "1500", "3000SC", "5000", "10000", "Marathon"];
+
+		$('#personGuess').on('select2:select', function (e) {
+			guess = dat[e.params.data.id];
+			POTD = dat[IDOTD];
+
+			console.log(e);
+			console.log(guess);
+			console.log(POTD);
+			console.log(dat);
+
+			var date = new Date(0);
+
+			var row = table.insertRow();
+			for (const f of fields) {
+				console.log(guess[f]);
+				var cell = row.insertCell();
+				var value = guess[f];
+				if (typeof value === 'number' && f != "BirthYear") {
+					if (value > 0.1) {
+						if (value < POTD[f]) {
+							cell.innerHTML = ("⬆ ").concat(fancyTimeFormat(value), " ⬆");
+						} else if (value > POTD[f] && POTD[f] > 0.1) {
+							cell.innerHTML = ("⬇ ").concat(fancyTimeFormat(value), " ⬇");
+						} else {
+							cell.innerHTML = fancyTimeFormat(value);
+						}
+						if (POTD[f] > 0.1) {
+							if (Math.abs((POTD[f] - value) / value) < 0.01) {
+								cell.style.backgroundColor = "#008450";
+								cell.style.color = "white";
+							} else if (Math.abs((POTD[f] - value) / value) < 0.03) {
+								cell.style.backgroundColor = "#EFB700";
+								cell.style.color = "white";
+							} else {
+								cell.style.backgroundColor = "#B81D13";
+								cell.style.color = "white";
+							}
+						}
+					}
+				} else if (f == "BirthYear") {
+					cell.innerHTML = value;
+					if (value < POTD[f]) {
+						cell.innerHTML = ("⬆ ").concat(value, " ⬆");
+					} else if (value > POTD[f]) {
+						cell.innerHTML = ("⬇ ").concat(value, " ⬇");
+					} else {
+						cell.innerHTML = value;
+					}
+					if (POTD[f] > 0.1) {
+						if (Math.abs(POTD[f] - value) < 1) {
+							cell.style.backgroundColor = "#008450";
+							cell.style.color = "white";
+						} else if (Math.abs(POTD[f] - value) < 4) {
+							cell.style.backgroundColor = "#EFB700";
+							cell.style.color = "white";
+						} else {
+							cell.style.backgroundColor = "#B81D13";
+							cell.style.color = "white";
+						}
+					}
+				} else if (f == "Country" || f == "Name") {
+					cell.innerHTML = value;
+					if (POTD[f] == value) {
+						cell.style.backgroundColor = "#008450";
+						cell.style.color = "white";
+					}
+				} else {
+					cell.innerHTML = value;
+				}
+			}
+
+			if (IDOTD == e.params.data.id) {
+				video_reveal.classList.add("active-animation");
+				winmess.innerHTML = POTD["message"];
+			}
+
+			$("#personGuess").val('').trigger('change');
+		});
+
+	});
+
+
+	var coll = document.getElementById("collapsible");
+	coll.addEventListener("click", function () {
+		this.classList.toggle("active");
+		var content = this.nextElementSibling;
+		if (content.style.display === "block") {
+			content.style.display = "none";
+		} else {
+			content.style.display = "block";
+		}
+	});
 </script>
