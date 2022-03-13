@@ -126,17 +126,19 @@
 	}
 
 	$(document).ready(function () {
-		var dat;
 
 		var IDOTD;
-		var flag = false;
 		var POTD;
+		var dat = {};
+		var playback_speed = 1.0;
 
 		const winmess = document.getElementById('winMessage');
 
 		const video_hidden = document.getElementById('video_hidden');
 		const video_hint = document.getElementById('video_hint');
 		const video_reveal = document.getElementById('video_reveal');
+
+		var table = document.getElementById("ResultsTable");
 
 		var order;
 		$.getJSON("order.json", function (json) {
@@ -151,11 +153,7 @@
 			video_hint.src = 'vids/' + IDOTD.toString() + '/hint.mp4';
 			video_reveal.src = 'vids/' + IDOTD.toString() + '/reveal.mp4';
 		});
-
-
-		var dat = {};
-
-		var playback_speed = 1.0;
+		
 
 		$('#video_reveal').on('click', function () {
 			if (playback_speed == 1.0) {
@@ -170,7 +168,7 @@
 			video_reveal.playbackRate = playback_speed;
 		});
 
-		var table = document.getElementById("ResultsTable");
+		
 
 		$("#personGuess").select2();
 
@@ -192,6 +190,7 @@
 
 			console.log(e);
 			console.log(guess);
+			console.log(IDOTD);
 			console.log(POTD);
 			console.log(dat);
 
