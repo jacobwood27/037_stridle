@@ -127,7 +127,7 @@
 
 	$(document).ready(function () {
 
-		var IDOTD;
+		var IDOTD = 14347437;
 		var POTD;
 		var dat = {};
 		var playback_speed = 1.0;
@@ -145,14 +145,15 @@
 			order = json;
 		});
 
-		var counter;
-		$.getJSON("counter", function (json) {
-			counter = json;
-			IDOTD = order[counter - 1];
+//		var counter;
+//		$.getJSON("counter", function (json) {
+//			counter = json;
+//			IDOTD = order[counter - 1];
+//			console.log(IDOTD);
 			video_hidden.src = 'vids/' + IDOTD.toString() + '/hidden.mp4';
 			video_hint.src = 'vids/' + IDOTD.toString() + '/hint.mp4';
 			video_reveal.src = 'vids/' + IDOTD.toString() + '/reveal.mp4';
-		});
+//		});
 		
 
 		$('#video_reveal').on('click', function () {
