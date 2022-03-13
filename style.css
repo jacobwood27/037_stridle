@@ -44,3 +44,15 @@ img {
     background-color: #f1f1f1;
     position: absolute;
   }
+
+  table{
+    border-collapse:collapse;
+    border:2px solid #ffffff;
+    }
+    
+    table td{
+    border:2px solid #ffffff;
+    }
+    table th{
+      border:2px solid #ffffff;
+      }
