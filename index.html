@@ -78,9 +78,9 @@
 		</div>
 		<br>
 		<div style="text-align:center">
-			<table id="ResultsTable" style="width: 100%">
+			<table id="ResultsTable" style="width: 100%;  overflow-x: scroll;">
 				<tr>
-					<th style="width: 12%;">Name</th>
+					<th>Name</th>
 					<th>Nation</th>
 					<th>Birth</th>
 					<th>100</th>
@@ -127,7 +127,7 @@
 
 	$(document).ready(function () {
 
-		var IDOTD = 14347437;
+		var IDOTD = 14208478;
 		var POTD;
 		var dat = {};
 		var playback_speed = 1.0;
@@ -205,9 +205,9 @@
 				if (typeof value === 'number' && f != "BirthYear") {
 					if (value > 0.1) {
 						if (value < POTD[f]) {
-							cell.innerHTML = ("⬆ ").concat(fancyTimeFormat(value), " ⬆");
+							cell.innerHTML = ("").concat(fancyTimeFormat(value), "<br />⬆");
 						} else if (value > POTD[f] && POTD[f] > 0.1) {
-							cell.innerHTML = ("⬇ ").concat(fancyTimeFormat(value), " ⬇");
+							cell.innerHTML = ("⬇<br />").concat(fancyTimeFormat(value), "");
 						} else {
 							cell.innerHTML = fancyTimeFormat(value);
 						}
@@ -227,9 +227,9 @@
 				} else if (f == "BirthYear") {
 					cell.innerHTML = value;
 					if (value < POTD[f]) {
-						cell.innerHTML = ("⬆ ").concat(value, " ⬆");
+						cell.innerHTML = ("").concat(value, "<br />⬆");
 					} else if (value > POTD[f]) {
-						cell.innerHTML = ("⬇ ").concat(value, " ⬇");
+						cell.innerHTML = ("⬇<br />").concat(value, "");
 					} else {
 						cell.innerHTML = value;
 					}

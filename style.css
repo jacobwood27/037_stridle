@@ -53,7 +53,9 @@ img {
     
     table td{
     border:2px solid #ffffff;
+    min-width: 20px;
     }
     table th{
       border:2px solid #ffffff;
+      min-width: 60px;
       }
