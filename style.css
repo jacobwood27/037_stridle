@@ -53,9 +53,20 @@ img {
     
     table td{
     border:2px solid #ffffff;
-    min-width: 20px;
+    min-width: 60px;
     }
     table th{
       border:2px solid #ffffff;
       min-width: 60px;
       }
+
+      @media (max-width: 960px) {
+        table {
+          display: block;
+          max-width: -moz-fit-content;
+          max-width: fit-content;
+          margin: 0 auto;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+    }
