@@ -22,18 +22,18 @@ img {
   }
 
   .collapsible {
-    background-color: cornsilk;
+    /* background-color: cornsilk; */
     cursor: pointer;
-    border: 1px solid black;
-    border-radius: 3px;
+    /* border: 1px solid black; */
+    /* border-radius: 3px; */
     text-align: center;
-    font-size: 15px;
+    /* font-size: 15px; */
     z-index: 5;
   }
   
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
   .active, .collapsible:hover {
-    background-color: #ccc;
+    text-align: center;
   }
 
   .content {

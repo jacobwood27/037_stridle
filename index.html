@@ -12,8 +12,34 @@
 
 <body>
 	<div style="text-align:center">
-		<button type="button" id="collapsible" class="collapsible" style="text-align:center;">Info</button>
-		<div class="content" ;
+		
+		
+	</div>
+
+	<div class="content-wrapper">
+		<div style="text-align:center; position:relative;">
+			<div style="height:400px; width:100%;"></div>
+			<video src='vids/14347437/hidden.mp4' type="video/mp4" id="video_hidden" playsinline loop muted autoplay
+				style="                     position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:1"></video>
+			<video src='vids/14347437/hint.mp4' type="video/mp4" id="video_hint" playsinline loop muted autoplay
+				style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:2"></video>
+			<video src='vids/14347437/reveal.mp4' type="video/mp4" id="video_reveal" playsinline loop muted autoplay
+				style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:3"></video>
+		</div>
+		<br>
+		<div style="text-align:center;">
+			<label>Whose stride is this? </label>
+		</div>
+		<div style="text-align:center;">
+			<form>
+				<select name="personGuess" id="personGuess" style='text-align:center;width:300px'>
+					<option disabled selected hidden value> -- select an option -- </option>
+				</select>
+			</form>
+			<br>
+			<button type="button" class="collapsible" onclick="video_hint.classList.add('active-animation');">Hint</button>
+			<button type="button" id="collapsible" class="collapsible" style="text-align:center;">Info</button>
+			<div class="content" ;
 			style="z-index:10; text-align:center; top:50px; left:50%; transform: translate(-50%, 0%);">
 			<div>
 				<p style="margin-bottom: 2px; font-weight:bold; margin-top: 0px">Colors</p>
@@ -52,30 +78,6 @@
 						href="https://github.com/hkchengrex/STCN">STCN</a></p>
 			</div>
 		</div>
-	</div>
-
-	<div class="content-wrapper">
-		<div style="text-align:center; position:relative;">
-			<div style="height:400px; width:100%;"></div>
-			<video src='vids/14347437/hidden.mp4' type="video/mp4" id="video_hidden" playsinline loop muted autoplay
-				style="                     position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:1"></video>
-			<video src='vids/14347437/hint.mp4' type="video/mp4" id="video_hint" playsinline loop muted autoplay
-				style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:2"></video>
-			<video src='vids/14347437/reveal.mp4' type="video/mp4" id="video_reveal" playsinline loop muted autoplay
-				style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:3"></video>
-		</div>
-		<br>
-		<div style="text-align:center;">
-			<label>Whose stride is this? </label>
-		</div>
-		<div style="text-align:center;">
-			<form>
-				<select name="personGuess" id="personGuess" style='text-align:center;width:300px'>
-					<option disabled selected hidden value> -- select an option -- </option>
-				</select>
-			</form>
-			<br>
-			<button type="button" onclick="video_hint.classList.add('active-animation');">Hint!</button>
 		</div>
 		<br>
 		<div style="text-align:center">
