@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="select2.min.js"></script>
+	<script src="stats.js"></script>
+	<script src="order.js"></script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-E1BPQDG0GG"></script>
 	<script>
@@ -39,13 +41,14 @@
 		<div style="text-align:center;">
 			<label>Whose stride is this? </label>
 		</div>
-		<div style="text-align:center;">
+		<div style="text-align:center; width:300px; margin: 0 auto;">
 			<form>
 				<select name="personGuess" id="personGuess" style='text-align:center;width:300px'>
 					<option disabled selected hidden value> -- select an option -- </option>
 				</select>
 			</form>
 			<br>
+			<button type="button" class="collapsible" id="PrevButton" onclick="video_hint.classList.add('active-animation');" style="float: left; visibility: hidden;">Prev</button>
 			<button type="button" class="collapsible" onclick="video_hint.classList.add('active-animation');">Hint</button>
 			<button type="button" id="collapsible" class="collapsible" style="text-align:center;">Info</button>
 			<div class="content" ;
@@ -87,6 +90,7 @@
 						href="https://github.com/hkchengrex/STCN">STCN</a></p>
 			</div>
 		</div>
+		<button type="button" class="collapsible" id="NextButton" onclick="video_hint.classList.add('active-animation');" style="float: right; visibility: hidden;">Next</button>
 		</div>
 		<br>
 		<div style="text-align:center">
@@ -139,12 +143,23 @@
 
 	$(document).ready(function () {
 
-		//const IDOTD = 14208478;
-		// const IDOTD = 14347437;
-		const IDOTD = 14276130;
 		var POTD;
 		var dat = {};
 		var playback_speed = 1.0;
+
+		var startDate  = new Date('2022-03-11');
+		const today      = new Date();
+		const offset = startDate.getTimezoneOffset();
+		var startmidnight = new Date(startDate.getTime() + offset*60*1000);
+
+		const diffInMs   = today - startmidnight;
+		const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+		var which_day = Math.floor(diffInDays) % order.length;
+		const last_day = which_day;
+
+		const nextbutton = document.getElementById('NextButton');
+		const prevbutton = document.getElementById('PrevButton');
 
 		const winmess = document.getElementById('winMessage');
 
@@ -154,20 +169,35 @@
 
 		var table = document.getElementById("ResultsTable");
 
-		var order;
-		$.getJSON("order.json", function (json) {
-			order = json;
-		});
+		const urlParams = new URLSearchParams(location.search);
 
-//		var counter;
-//		$.getJSON("counter", function (json) {
-//			counter = json;
-//			IDOTD = order[counter - 1];
-//			console.log(IDOTD);
-			video_hidden.src = 'vids/' + IDOTD.toString() + '/hidden.mp4';
-			video_hint.src = 'vids/' + IDOTD.toString() + '/hint.mp4';
-			video_reveal.src = 'vids/' + IDOTD.toString() + '/reveal.mp4';
-//		});
+		if (urlParams.has('day')){
+			const urlWhichday = parseInt(urlParams.get('day'));
+			if (!isNaN(urlWhichday) && urlWhichday >= 0 && urlWhichday <= last_day) {
+				which_day = urlWhichday;
+			} 
+		}
+
+		if (which_day < last_day){
+			function f() {
+				window.location.href = "/?day=" + (which_day+1).toString();
+			}
+			nextbutton.onclick = f;
+			nextbutton.style.visibility = "visible";
+		}
+		if (which_day > 0){
+			function f() {
+				window.location.href = "/?day=" + (which_day-1).toString();
+			}
+			prevbutton.onclick = f;
+			prevbutton.style.visibility = "visible";
+		}
+
+		const IDOTD = order[which_day];
+
+		video_hidden.src = 'vids/' + IDOTD.toString() + '/hidden.mp4';
+		video_hint.src   = 'vids/' + IDOTD.toString() + '/hint.mp4';
+		video_reveal.src = 'vids/' + IDOTD.toString() + '/reveal.mp4';
 		
 
 		$('#video_reveal').on('click', function () {
