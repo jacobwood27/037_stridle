@@ -38,8 +38,8 @@
 				style="filter:opacity(0%);  position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:3"></video>
 		</div>
 		<br>
-		<div style="text-align:center;">
-			<label>Whose stride is this? </label>
+		<div style="text-align:center; margin:5px">
+			<label ID="whoseLabel">Whose stride is this? </label>
 		</div>
 		<div style="text-align:center; width:300px; margin: 0 auto;">
 			<form>
@@ -216,27 +216,18 @@
 
 		$("#personGuess").select2();
 
-		$.getJSON("stats.json", function (json) {
-			dat_raw = json;
-			for (var d in dat_raw) {
-				var newOption = new Option(dat_raw[d]["Name"], dat_raw[d]["ID"], false, false);
-				dat[dat_raw[d]["ID"]] = dat_raw[d]
-				$('#personGuess').append(newOption).trigger('change');
-			}
+		for (var d in stats) {
+			var newOption = new Option(stats[d]["Name"], stats[d]["ID"], false, false);
+			dat[stats[d]["ID"]] = stats[d]
+			$('#personGuess').append(newOption).trigger('change');
+		}
 			
-		});
 
 		var fields = ["Name", "Country", "BirthYear", "100", "200", "400", "800", "1500", "3000SC", "5000", "10000", "Marathon"];
 
 		$('#personGuess').on('select2:select', function (e) {
 			guess = dat[e.params.data.id];
 			POTD = dat[IDOTD];
-
-			console.log(e);
-			console.log(guess);
-			console.log(IDOTD);
-			console.log(POTD);
-			console.log(dat);
 
 			var date = new Date(0);
 
@@ -302,6 +293,7 @@
 			if (IDOTD == e.params.data.id) {
 				video_reveal.classList.add("active-animation");
 				winmess.innerHTML = POTD["message"];
+				document.getElementById("whoseLabel").innerHTML = "You got it!"
 			}
 
 			$("#personGuess").val('').trigger('change');
@@ -321,6 +313,3 @@
 		}
 	});
 </script>
-<!-- 
-<script data-goatcounter="https://stridle.goatcounter.com/count"
-    	async src="//gc.zgo.at/count.js"></script> -->
