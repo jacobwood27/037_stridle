@@ -192,8 +192,8 @@ const stats = [
         "5000": 808.06,
         "10000": 0.0,
         "Marathon": 0.0,
-        "3000SC": 475.28,
-        "message": "https://www.youtube.com/watch?v=pnHBq9jGzUw"
+        "3000SC": 475.28,  
+        "message": "Well done! <a href=https://youtu.be/pnHBq9jGzUw?t=12>This stride</a> is taken from the end of Brahim Boulami's world record 7:55.28 steeplechase set at an IAAF Golden League meet in Brussels in 2001."
     },
     {
         "Name": "Donavan BRAZIER",
@@ -224,7 +224,7 @@ const stats = [
         "10000": 0.0,
         "Marathon": 0.0,
         "3000SC": 0.0,
-        "message": "https://www.youtube.com/watch?v=jDwc3KWn9zU"
+        "message": "That's the one! <a href=https://youtu.be/jDwc3KWn9zU?t=136>This stride</a> is taken from Valerie Brisco-Hooks' gold medal finish in the 400 at the 1984 Olympics. She also won gold in the 200 and the 4x400 m relay at the 1984 games. Valerie currently runs the <a href=https://valeriebriscohooksfoundation.org/>Valerie Brisco Hooks Foundation</a> where she advocates for drug-free schools in Los Angeles."
     },
     {
         "Name": "Trayvon BROMELL",
@@ -344,8 +344,8 @@ const stats = [
         "5000": 879.33,
         "10000": 0.0,
         "Marathon": 0.0,
-        "3000SC": 524.32,
-        "message": "https://www.youtube.com/watch?v=NLStiKABotM"
+        "3000SC": 524.32, 
+        "message": "Yep! <a href=https://youtu.be/NLStiKABotM?t=502>This stride</a> is taken from the end of Beatrice Chepkoech's world record 8:44.32 at a Diamond League meet in 2018, where she bested the previous world record by 8 seconds."
     },
     {
         "Name": "Ruth CHEPNGETICH",
@@ -766,7 +766,7 @@ const stats = [
         "10000": 0.0,
         "Marathon": 0.0,
         "3000SC": 0.0,
-        "message": "https://www.youtube.com/watch?v=Z21fPxVeg6s"
+        "message": "That's him! <a href=https://youtu.be/Z21fPxVeg6s?t=303>This stride</a> is taken from Tyson Gay's 9.71 he ran at the 2009 World Championships in Berlin."
     },
     {
         "Name": "Dejen GEBREMESKEL",
@@ -902,7 +902,7 @@ const stats = [
         "10000": 0.0,
         "Marathon": 0.0,
         "3000SC": 0.0,
-        "message": "https://www.youtube.com/watch?v=lbXMvmTpbYI"
+        "message": "You got it! <a href=https://youtu.be/lbXMvmTpbYI?t=53>This stride</a> is taken from Flo-Jo's gold medal performance in the 100 at the 1988 Olympics in Seoul. She also won gold in the 100 and 4x100 relay at those games. She still holds the world record in the 100 and 200, both set in 1989. In Time's 2020 list of the most influential women of the past century she was named <a href=https://time.com/5793709/florence-griffith-joyner-100-women-of-the-year/>woman of the year</a> for 1988."
     },
     {
         "Name": "Hicham EL GUERROUJ",
@@ -1143,7 +1143,7 @@ const stats = [
         "10000": 0.0,
         "Marathon": 0.0,
         "3000SC": 0.0,
-        "message": "https://www.youtube.com/watch?v=-_i74ltv-7U"
+        "message": "Ta-da! <a href=https://youtu.be/-_i74ltv-7U?t=55>This stride</a> is taken from Tatyana Kazankina's 3:52.47 she ran at a meet in Zurich in 1980. Tatyana was the first woman to run under 4:00 in the 1500 and won three Olympic gold medals. She defended her dissertation for the Candidate of Pedagogical Science degree at the Lesgaft Institute of Physical Education and worked as a lecturer until 1997. She is the author of more than 20 scientific works."
     },
     {
         "Name": "Mary Jepkosgei KEITANY",
@@ -1354,7 +1354,7 @@ const stats = [
         "10000": 0.0,
         "Marathon": 8363.0,
         "3000SC": 473.64,
-        "message": "https://www.youtube.com/watch?v=jB7g5z_APIo"
+        "message": "Yep yep yep! <a href=https://youtu.be/jB7g5z_APIo?t=55>This stride</a> is taken from Brimin Kipruto's 7:53.64 he ran at a Diamond League meet in 2011, just 0.01 seconds shy of the world record."
     },
     {
         "Name": "Moses KIPTANUI",
@@ -1370,7 +1370,7 @@ const stats = [
         "10000": 0.0,
         "Marathon": 0.0,
         "3000SC": 476.16,
-        "message":"You got it! <a href=https://youtu.be/L2tHUPdjnnw?t=72>This clip</a> blah blah Moses KIPTANUI"
+        "message":"Nice! <a href=https://youtu.be/ahQGhvoisGk?t=625>This stride</a> is taken from Moses Kiptanui's dominant steeplechase performance at the Bislett Games in Oslo in 1995. Moses set world records in the 3000, 5000, and steeplechase during his career and was the first man to run under 8:00 in the steeple."
     },
     {
         "Name": "Faith KIPYEGON",
@@ -1536,7 +1536,7 @@ const stats = [
         "10000": 0.0,
         "Marathon": 0.0,
         "3000SC": 0.0,
-        "message": "You got it! <a href=https://youtu.be/L2tHUPdjnnw?t=72>This clip</a> is from Sammy's 1:42.28 he ran in 1984, the third fastest 800 ever at the time. This was the Kenyan record until David Rudisha broke it in 2009."
+        "message": "You got it! <a href=https://youtu.be/L2tHUPdjnnw?t=72>This stride</a> is from Sammy's 1:42.28 he ran in 1984, the third fastest 800 ever at the time. This was the Kenyan record until David Rudisha broke it in 2009."
     },
     {
         "Name": "Jarmila KRATOCHV\u00cdLOV\u00c1",
@@ -1822,7 +1822,7 @@ const stats = [
         "10000": 1793.51,
         "Marathon": 0.0,
         "3000SC": 0.0,
-        "message": "https://www.youtube.com/watch?v=EV_eFh01HxA"
+        "message": "Woohoo! <a href=https://youtu.be/EV_eFh01HxA?t=326>This stride</a> is from Alice Aprot Nawowuna's performance in the 10k at the 2016 Olympics in Rio de Janeiro. She set a blistering pace here that resulted in 4 of the 5 fastest 10ks of all time. "
     },
     {
         "Name": "Noah NGENY",
@@ -2003,7 +2003,7 @@ const stats = [
         "10000": 1801.09,
         "Marathon": 8125.0,
         "3000SC": 0.0,
-        "message": "Nice! <a href=https://youtu.be/wRw754RYPDM?t=44>This clip</a> is from Paula's 2:20:57 marathon she ran to win the 2005 World Championships in Helsinki. Paula is best known for running 2:15:25 which served as the women's marathon world record from 2003 to 2019 when it was broken by Brigid Kosgei."
+        "message": "Nice! <a href=https://youtu.be/wRw754RYPDM?t=44>This stride</a> is from Paula's 2:20:57 marathon she ran to win the 2005 World Championships in Helsinki. Paula is best known for running 2:15:25 which served as the women's marathon world record from 2003 to 2019 when it was broken by Brigid Kosgei."
     },
     {
         "Name": "Butch REYNOLDS",
