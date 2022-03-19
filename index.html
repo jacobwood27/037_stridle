@@ -48,7 +48,7 @@
 			<button type="button" class="collapsible" onclick="video_hint.classList.add('active-animation');">Hint</button>
 			<button type="button" id="collapsible" class="collapsible" style="text-align:center;">Info</button>
 			<div class="content" ;
-			style="z-index:10; text-align:center; top:30px; left:50%; transform: translate(-50%, 0%);">
+			style="z-index:10; text-align:center; top:5px; left:50%; transform: translate(-50%, 0%);" onclick="togglecollapse()">
 			<div>
 				<p style="margin-bottom: 2px; font-weight:bold; margin-top: 0px">How to Play</p>
 				<p style="margin-bottom: 2px; margin-top: 2px;">You get as many guesses as you would like
@@ -85,15 +85,19 @@
 			<div>
 				<p style="margin-bottom: 2px; font-weight:bold;">Data</p>
 				<p style="margin-bottom: 2px; margin-top: 2px;">All data is collected from <a
-						href="https://www.worldathletics.org/records/all-time-toplists/sprints/100-metres/outdoor/women/senior">worldathletics.org</a>
+						href="https://www.worldathletics.org/records/all-time-toplists/sprints/100-metres/outdoor/women/senior" target="_blank">worldathletics.org</a>
 				</p>
 				<p style="margin-bottom: 2px; margin-top: 2px;">Top 10 athletes of all time in each event included</p>
 			</div>
 			<div>
 				<p style="margin-bottom: 2px; font-weight:bold;">Credit</p>
 				<p style="margin-bottom: 2px; margin-top: 2px;">Idea credit to Paul Wellman and August Pappas</p>
-				<p style="margin-bottom: 2px; margin-top: 2px;">Pixel segmentation performed with <a href="https://hkchengrex.github.io/MiVOS/">MiVOS</a> and <a href="https://github.com/hkchengrex/STCN">STCN</a></p>
-				<p style="margin-bottom: 2px; margin-top: 2px;">Built by <a href="https://jacobw.xyz/">Jacob Wood</a>. Here is the <a href="https://github.com/jacobwood27/037_stridle">code</a> and a <a href="https://jacobw.xyz/projects/stridle/">blog post</a></p>
+				<p style="margin-bottom: 2px; margin-top: 2px;">Pixel segmentation performed with <a href="https://hkchengrex.github.io/MiVOS/" target="_blank">MiVOS</a> and <a href="https://github.com/hkchengrex/STCN" target="_blank">STCN</a></p>
+				<p style="margin-bottom: 2px; margin-top: 2px;">Built by <a href="https://jacobw.xyz/" target="_blank">Jacob Wood</a>. Here is the <a href="https://github.com/jacobwood27/037_stridle" target="_blank">code</a> and a <a href="https://jacobw.xyz/projects/stridle/" target="_blank">blog post</a></p>
+			</div>
+			<br>
+			<div>
+				<p style="margin-bottom: 2px; color:darkgray">Click to close</p>
 			</div>
 		</div>
 		<button type="button" class="collapsible" id="NextButton" style="float: right; visibility: hidden;">Next</button>
@@ -310,13 +314,14 @@
 
 
 	var coll = document.getElementById("collapsible");
-	coll.addEventListener("click", function () {
-		this.classList.toggle("active");
-		var content = this.nextElementSibling;
+	function togglecollapse() {
+		coll.classList.toggle("active");
+		var content = coll.nextElementSibling;
 		if (content.style.display === "block") {
 			content.style.display = "none";
 		} else {
 			content.style.display = "block";
 		}
-	});
+	}
+	coll.addEventListener("click", togglecollapse);
 </script>
