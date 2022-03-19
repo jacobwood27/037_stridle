@@ -1689,6 +1689,21 @@ const stats = [
         "3000SC": 0.0
     },
     {
+        "Name": "Erin MENEFEE",
+        "ID": 123456789,
+        "Country": "United States",
+        "BirthYear": 1992,
+        "100": 0.0,
+        "200": 0.0,
+        "400": 0.0,
+        "800": 137.0,
+        "1500": 269.2,
+        "5000": 1019.0,
+        "10000": 2192.0,
+        "Marathon": 9772.0,
+        "3000SC": 642.0
+    },
+    {
         "Name": "LaShawn MERRITT",
         "ID": 14245966,
         "Country": "United States",
