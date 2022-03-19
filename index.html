@@ -244,7 +244,6 @@
 
 			var row = table.insertRow();
 			for (const f of fields) {
-				console.log(guess[f]);
 				var cell = row.insertCell();
 				var value = guess[f];
 				if (typeof value === 'number' && f != "BirthYear") {
