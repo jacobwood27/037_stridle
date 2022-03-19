@@ -902,7 +902,7 @@ const stats = [
         "10000": 0.0,
         "Marathon": 0.0,
         "3000SC": 0.0,
-        "message": "Well done! <a href=https://youtu.be/lbXMvmTpbYI?t=53>This stride</a> is taken from Flo-Jo's gold medal performance in the 100 at the 1988 Olympics in Seoul. She also won gold in the 100 and 4x100 relay at those games. She still holds the world record in the 100 and 200, both set in 1989. In Time's 2020 list of the most influential women of the past century she was named <a href=https://time.com/5793709/florence-griffith-joyner-100-women-of-the-year/>woman of the year</a> for 1988."
+        "message": "Well done! <a href=https://youtu.be/lbXMvmTpbYI?t=53>This stride</a> is taken from Flo-Jo's gold medal performance in the 100 at the 1988 Olympics in Seoul. She also won gold in the 100 and 4x100 relay at those games. She still holds the world record in the 100 and 200, both set in 1988. In Time's 2020 list of the most influential women of the past century she was named <a href=https://time.com/5793709/florence-griffith-joyner-100-women-of-the-year/>woman of the year</a> for 1988."
     },
     {
         "Name": "Hicham EL GUERROUJ",
