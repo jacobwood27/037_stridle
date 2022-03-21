@@ -11,6 +11,7 @@
 	<script src="select2.min.js"></script>
 	<script src="stats.js"></script>
 	<script src="order.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-E1BPQDG0GG"></script>
 	<script>
@@ -222,6 +223,10 @@
 		</div>
 		<div style="text-align:justify; margin: 5 px auto;" id="winMessage">
 		</div>
+		<br>
+		<div id="chartcontainer" style="display: flex; width:100%; height:300px; flex: 1 1 auto;">
+			<canvas id="myChart" width="100%" height="100%"></canvas>
+		</div>
 	</div>
 </body>
 
@@ -249,11 +254,19 @@
 		return ret;
 	}
 
+
+
 	$(document).ready(function () {
 
 		var POTD;
 		var dat = {};
 		var playback_speed = 1.0;
+
+		var num_plays = 0;
+
+		var canvas = document.getElementById("myChart");
+		canvas.width = $("#chartcontainer").width();
+		canvas.height = $("#chartcontainer").height();
 
 		var startDate  = new Date('2022-03-18');
 		const today      = new Date();
@@ -310,6 +323,22 @@
 
 		video_container.load();
 
+
+		async function get_dp(s){
+			const dat = await $.getJSON("https://api.countapi.xyz/get/stridle.xyz/" + IDOTD.toString() + "-" + s);
+			return dat.value
+		}
+	
+		async function get_chart_data(){
+			let d = [	await get_dp("1"), 
+						await get_dp("2"),
+						await get_dp("3"),
+						await get_dp("4"),
+						await get_dp("5"),
+						await get_dp("6"),
+						await get_dp("dnf")]
+			return d;
+		}
 		//video_container.play();
 		//document.getElementById('video_hidden').src = 'vids/' + IDOTD.toString() + '/hidden.gif';
 		//document.getElementById('video_mp4').src = 'vids/' + IDOTD.toString() + '/hidden.mp4';
@@ -354,8 +383,18 @@
 
 		var cur_row = 0
 
+		let barchart = make_bar(get_chart_data());
+
 		$('#personGuess').on('select2:select', function (e) {
 			cur_row = cur_row + 1
+
+			if (cur_row == 1) {
+				$.getJSON("https://api.countapi.xyz/hit/stridle.xyz/" + IDOTD.toString() , function(response) {
+					num_plays = response.value;
+					console.log(num_plays);
+				});
+			}
+
 			guess = dat[e.params.data.id];
 			POTD = dat[IDOTD];
 
@@ -433,6 +472,18 @@
 				$("#personGuess").next().hide();
 				document.getElementById("hintbutton").style.display = "none";
 				make_confetti();
+				
+				barchart.then(function(chart) {
+					chart.data.datasets[0].data[cur_row-1] = chart.data.datasets[0].data[cur_row-1] + 1
+					chart.data.datasets[0].backgroundColor[cur_row-1] = "#5D3FD3";
+					chart.update();
+				});
+				
+
+				$.getJSON("https://api.countapi.xyz/hit/stridle.xyz/" + IDOTD.toString() + "-" + cur_row.toString(), function(response) {
+					console.log(response);
+				});
+
 			} else if (cur_row == 6){
 				video_container.classList.add("active-animation");
 				video_mp4.src  = 'vids/' + IDOTD.toString() + '/reveal.mp4';
@@ -444,13 +495,22 @@
 				winmess.innerHTML = POTD["message"];
 				document.getElementById("whoseLabel").style.display = "none";
 				$("#personGuess").next().hide();
+
+				barchart.then(function(chart) {
+					chart.data.datasets[0].data[6] = chart.data.datasets[0].data[6] + 1
+					chart.data.datasets[0].backgroundColor[6] = "#5D3FD3";
+					chart.update();
+				});
+
+				$.getJSON("https://api.countapi.xyz/hit/stridle.xyz/" + IDOTD.toString() + "-wrong", function(response) {
+					console.log(response);
+				});
 			} 
 
 			//$("#personGuess").val('').trigger('change');
 		});
-
 	});
-
+	
 
 	var coll = document.getElementById("collapsible");
 	function togglecollapse() {
@@ -652,6 +712,62 @@
 	// kick off the render loop
 	window.initBurst()
 	render()
+}
+
+async function make_bar(dat){
+	console.log(dat)
+	d = await(dat)
+	const labels = ["1","2","3","4","5","6","DNF"];
+	const data = {
+		labels: labels,
+		datasets: [{
+			data: d,
+			backgroundColor: [
+				'#A9A9A9',
+				'#A9A9A9',
+				'#A9A9A9',
+				'#A9A9A9',
+				'#A9A9A9',
+				'#A9A9A9',
+				'#A9A9A9'
+			],
+		}]
+	};
+	const config = {
+		type: 'bar',
+		data: data,
+		options: {
+		  	scales: {
+				y: {
+					title: {
+						display: true,
+						text: "# People"
+					},
+					beginAtZero: true
+				},
+				x: {
+					title: {
+						display: true,
+						text: "# Guesses"
+					}
+				}
+			},
+			plugins: {
+				legend: {
+					display: false,
+				},
+				title: {
+					display: true,
+					text: 'This Stridle\'s Results'
+				}
+			}
+		}
+	};
+	var myChart = new Chart(
+		document.getElementById('myChart'),
+		config
+	);
+	return myChart;
 }
 
 </script>
