@@ -262,6 +262,8 @@
 		var dat = {};
 		var playback_speed = 1.0;
 
+		var graph_dat = [0,0,0,0,0,0,0];
+
 		var num_plays = 0;
 
 		var canvas = document.getElementById("myChart");
@@ -325,8 +327,20 @@
 
 
 		async function get_dp(s){
-			const dat = await $.getJSON("https://api.countapi.xyz/get/stridle.xyz/" + IDOTD.toString() + "-" + s)
-			return dat.value
+			return new Promise(function (resolve, reject) {
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "https://api.countapi.xyz/get/stridle.xyz/" + IDOTD.toString() + "-" + s);
+				xhr.responseType = "json";
+				xhr.onload = function () {
+					var status = xhr.status;
+					if (status == 200) {
+						resolve(this.response.value);
+					} else {
+						resolve(0);
+					}
+				};
+				xhr.send();
+			});
 		}
 	
 		async function get_chart_data(){
@@ -339,14 +353,6 @@
 						await get_dp("dnf")]
 			return d;
 		}
-		//video_container.play();
-		//document.getElementById('video_hidden').src = 'vids/' + IDOTD.toString() + '/hidden.gif';
-		//document.getElementById('video_mp4').src = 'vids/' + IDOTD.toString() + '/hidden.mp4';
-		//document.getElementById('video_webm').src = 'vids/' + IDOTD.toString() + '/hidden.webm';
-		//console.log(document.getElementById('video_webm'));
-		//video_hidden.src = 'vids/' + IDOTD.toString() + '/hidden.mp4';
-		//video_hint.src   = 'vids/' + IDOTD.toString() + '/hint.mp4';
-		//video_reveal.src = 'vids/' + IDOTD.toString() + '/reveal.mp4';
 		
 
 		$('#video_container').on('click', function () {
@@ -715,7 +721,6 @@
 }
 
 async function make_bar(dat){
-	console.log(dat)
 	d = await(dat)
 	const labels = ["1","2","3","4","5","6","DNF"];
 	const data = {
@@ -767,6 +772,7 @@ async function make_bar(dat){
 		document.getElementById('myChart'),
 		config
 	);
+	
 	return myChart;
 }
 
