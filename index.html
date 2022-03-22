@@ -24,7 +24,7 @@
 </head>
 
 <body>
-	<canvas id="canvas"></canvas>	
+	<canvas id="canvas" style=" pointer-events:none;"></canvas>	
 	<div class="content-wrapper">
 		<div style="text-align:center; position:relative;">
 			<div style="height:400px; width:100%;"></div>
@@ -215,7 +215,7 @@
 		</div>
 		<br>
 		<div id="chartcontainer" style="display: flex; width:100%; height:300px; flex: 1 1 auto;">
-			<canvas id="myChart" width="100%" height="100%" style="position:absolute"></canvas>
+			<canvas id="myChart" width="100%" height="100%" style="position:absolute; z-index:1"></canvas>
 		</div>
 	</div>
 </body>
@@ -753,7 +753,7 @@ async function make_bar(dat){
 					display: true,
 					text: 'This Stridle\'s Results'
 				}
-			}
+			},
 		}
 	};
 	var myChart = new Chart(
