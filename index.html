@@ -32,6 +32,7 @@
 			<video playsinline loop muted autoplay id="video_container" style="position:absolute; top:0; left:50%; transform: translate(-50%, 0%); z-index:1">
 				<source type="video/webm; codecs=vp9,vorbis" id="video_webm">
 				<source type="video/mp4" id="video_mp4">
+				It looks like your browser does not support HTML5 video.
 			</video>
 
 		</div>
@@ -277,8 +278,6 @@
 		const video_container = document.getElementById('video_container');
 		const video_mp4  = document.getElementById('video_mp4');
 		const video_webm = document.getElementById('video_webm');
-		//const video_hint = document.getElementById('video_hint');
-		//const video_reveal = document.getElementById('video_reveal');
 
 		var table = document.getElementById("ResultsTable");
 
@@ -310,8 +309,8 @@
 
 		video_mp4.src  = 'vids/' + IDOTD.toString() + '/hidden.mp4';
 		video_webm.src = 'vids/' + IDOTD.toString() + '/hidden.webm';
-
 		video_container.load();
+		
 
 
 		async function get_dp(s){
@@ -458,6 +457,7 @@
 				video_container.classList.add("active-animation");
 				video_mp4.src  = 'vids/' + IDOTD.toString() + '/reveal.mp4';
 				video_webm.src = 'vids/' + IDOTD.toString() + '/reveal.webm';
+				video_container.innerHTML  += "It looks like your browser does not support HTML5 video. You can find the reveal <a href=\"https://stridle.xyz/vids/" + IDOTD.toString() + "/reveal.mp4\">here</a>."
 				video_container.load();
 
 				winmess.innerHTML = POTD["message"];
