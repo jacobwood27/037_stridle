@@ -1837,7 +1837,7 @@ const stats = [
         "10000": 1793.51,
         "Marathon": 0.0,
         "3000SC": 0.0,
-        "message": "<a href=https://youtu.be/EV_eFh01HxA?t=326>This stride</a> is from Alice Aprot Nawowuna's performance in the 10k at the 2016 Olympics in Rio de Janeiro. She set a blistering pace here that resulted in 4 of the 5 fastest 10ks of all time. "
+        "message": "<a href=https://youtu.be/EV_eFh01HxA?t=326>This stride</a> is from Alice Aprot Nawowuna's performance in the 10k at the 2016 Olympics in Rio de Janeiro, where she ended up running 29:53 and finishing 4th. She took the race out early and set a blistering pace that resulted in 4 of the 5 fastest 10ks of all time."
     },
     {
         "Name": "Noah NGENY",
