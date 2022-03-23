@@ -1143,7 +1143,7 @@ const stats = [
         "10000": 0.0,
         "Marathon": 0.0,
         "3000SC": 0.0,
-        "message": "<a href=https://youtu.be/-_i74ltv-7U?t=55>This stride</a> is taken from Tatyana Kazankina's 3:52.47 she ran at a meet in Zurich in 1980. Tatyana was the first woman to run under 4:00 in the 1500 and won three Olympic gold medals. She defended her dissertation for the Candidate of Pedagogical Science degree at the Lesgaft Institute of Physical Education and worked as a lecturer until 1997. She is the author of more than 20 scientific works."
+        "message": "<a href=https://youtu.be/-_i74ltv-7U?t=55>This stride</a> is taken from Tatyana Kazankina's 3:52.47 she ran at a meet in Zurich in 1980. Tatyana was the first woman to run under 4:00 in the 1500 and won three Olympic gold medals. She also defended her dissertation for the Candidate of Pedagogical Science degree at the Lesgaft Institute of Physical Education and worked as a lecturer until 1997. She is the author of more than 20 scientific works."
     },
     {
         "Name": "Mary Jepkosgei KEITANY",
